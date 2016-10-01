@@ -21,11 +21,7 @@
         <div class="H6" style="font-weight: bold">
             {{ Lang::get('default.query') }}:
         </div>
-        {{ Form::select('query', $queries = array(
-            'bgp' => Lang::get('default.bgp'),
-            'ping' => Lang::get('default.ping'),
-            'traceroute' => Lang::get('default.traceroute')
-            ), 0, array('onchange' => "changetext();", 'id' => 'query')) }}
+        {{ Form::select('query', Config::get('slaves.cmds'), 0, array('onchange' => "changetext();", 'id' => 'query')) }}
         <br />
         <br />
 
