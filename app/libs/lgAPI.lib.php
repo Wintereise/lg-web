@@ -24,14 +24,15 @@ class lgAPI
             case 'ping6':
             case 'traceroute':
             case 'traceroute6':
+            case 'stream':
                 curl_setopt($this->curl, CURLOPT_URL, sprintf("%s/%s/%s", $this->url, $type, $params));
             break;
+
             case 'bgp':
                 curl_setopt($this->curl, CURLOPT_URL, sprintf("%s/%s/%s/%s", $this->url, $type, $params, $mask));
             break;
         }
         $this->response = curl_exec($this->curl);
-        curl_close($this->curl);
         return $this;
     }
 
@@ -45,6 +46,11 @@ class lgAPI
         return json_decode($this->response, true);
     }
 
+    public function getRawResponse ()
+    {
+        return $this->response;
+    }
+
     public function reset ($url, $key)
     {
         $this->url = $url;
@@ -52,5 +58,10 @@ class lgAPI
         $this->curl = curl_init();
         curl_setopt($this->curl, CURLOPT_USERPWD, $key . ":" . $key);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, 1);
+    }
+
+    public function close ()
+    {
+        curl_close($this->curl);
     }
 }
