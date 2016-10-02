@@ -1,6 +1,6 @@
 <?php
 
 return array(
-    'companyName' => 'Query Foundry',
-    'asn' => 62638
+    'companyName' => 'Hyperconnezion',
+    'asn' => 135412
 );
