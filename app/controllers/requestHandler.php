@@ -23,7 +23,7 @@ class requestHandler extends BaseController
             return Response::make('You tried to use a probe that does not exist', 400);
         }
         $target = $this->parseInput();
-        if($target == false)
+        if($target == false && $task != 'tipfile')
             return Redirect::route('index')
                 ->with('results', 'Invalid input has been detected. If you chose a BGP command, please note that no prefixes longer than 24 bits (v4), or 48 bits (v6) are accepted.');
         $api = new lgAPI($slave['url'], $slave['key']);
@@ -124,6 +124,34 @@ class requestHandler extends BaseController
 
             break;
             case 'bgp':
+            break;
+
+            case 'tipfile':
+                if(in_array('tipfile', $slave['cmds']))
+                {
+                    $buffer = "";
+                    if(isset($slave['test-ips'][0]))
+                        $buffer .= "IPv4 Test IP: " . $slave['test-ips'][0] . PHP_EOL;
+                    if(isset($slave['test-ips'][1]))
+                        $buffer .= "IPv6 Test IP: " . $slave['test-ips'][1] . PHP_EOL;
+                    if(isset($slave['test-files']))
+                    {
+                        $buffer .= "Test Files: ";
+                        foreach ($slave['test-files'] as $file)
+                        {
+                            $buffer .= sprintf("<a href='%s'>%s </a>", $file['url'], $file['name']);
+                        }
+                        $buffer .= PHP_EOL;
+                    }
+                    else
+                        $buffer .= "No test files are defined for this node, apologies." . PHP_EOL;
+                    return Redirect::route('index')
+                        ->with('results', nl2br($buffer))
+                        ->withInput();
+                }
+                else
+                    return Redirect::route('index')
+                        ->with('results', 'We apologize, but that command (test files / ips) is not enabled for this probe.');
             break;
             default:
                 return false;

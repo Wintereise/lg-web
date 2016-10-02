@@ -32,7 +32,7 @@
             <br />
         </div>
 
-        <table>
+        <table id="table-ip">
             <tr>
                 <td>
                     {{ Form::radio('sourceIP', Request::getClientIp(), true, array('onclick' => "changetext()")) }}

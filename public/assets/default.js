@@ -8,6 +8,15 @@ function changetext() {
         document.getElementById("myTable").style.visibility = "hidden";
         document.getElementById("myTable2").style.visibility= "visible";
         document.getElementById('divIPv46').style.visibility='hidden';
+        document.getElementById("table-ip").style.visibility = "visible";
+        document.getElementById('fqdn').style.visibility = "visible";
+    }
+    else if (ind == 'tipfile')
+    {
+        document.getElementById('fqdn').style.visibility = "hidden";
+        document.getElementById("myTable").style.visibility = "hidden";
+        document.getElementById("table-ip").style.visibility = "hidden";
+        document.getElementById("myTable2").style.visibility= "hidden";
     }
     else
     {
@@ -15,6 +24,9 @@ function changetext() {
         document.getElementById("fqdn").innerHTML = "FQDN or IP Address:";
         document.getElementById('myTable').style.visibility='visible';
         document.getElementById('myTable2').style.visibility='hidden';
+        document.getElementById("table-ip").style.visibility = "visible";
+        document.getElementById('fqdn').style.visibility = "visible";
+        document.getElementById("myTable2").style.visibility= "hidden";
     }
     var rad;
     for (var i=0; i < document.lg.sourceIP.length; i++)

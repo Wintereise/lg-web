@@ -16,5 +16,6 @@ return array(
     'ipv4' => 'IPv4',
     'ipv6' => 'IPv6',
     'bgpRestrictions' => 'Only IP addresses are allowed parameters for BGP Queries. FQDN can not be used.',
+    'tipfile' => 'Test IPs / Files'
 
 );
