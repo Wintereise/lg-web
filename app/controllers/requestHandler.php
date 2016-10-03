@@ -124,6 +124,13 @@ class requestHandler extends BaseController
 
             break;
             case 'bgp':
+                if(in_array('bgp', $slave['cmds']))
+                {
+                    //do bgp stuff here
+                }
+                else
+                    return Redirect::route('index')
+                        ->with('results', 'We apologize, but that command (bgp) is not enabled for this probe.');
             break;
 
             case 'tipfile':
